@@ -48,7 +48,7 @@ function constructFunction(f) {
     usage.append(')');
     if (f.returns) {
         var returns = $('<span>').addClass('returns');
-        returns.append(' 🡒 ')
+        returns.append(' -> ')
         returns.append(makeArg(f.returns.type, f.returns.type, f.returns.desc));
     }
 
