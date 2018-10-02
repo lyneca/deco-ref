@@ -1,0 +1,101 @@
+body {
+    font-family: "Inconsolata", "Courier New", monospace;
+    background-color: white;
+}
+
+h1 {
+    font-weight: normal;
+    margin: 0;
+}
+
+div.header {
+    grid-column: span 2;
+    text-align: center;
+    border-bottom: 1px solid #eeeeee;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.underline {
+    border-bottom: 1px solid #bbbbbb;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+}
+
+div.content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 5px;
+}
+
+div.week {
+    border: 1px solid #bbbbbb;
+}
+
+div.week-heading {
+    text-align: center;
+    margin-bottom: 5px;
+    font-size: 30px;
+    border-bottom: 1px solid #bbbbbb;
+}
+
+div.function {
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #bbbbbb;
+}
+
+div.function-name {
+    cursor: pointer;
+}
+
+div.function-name:before {
+    content: ': ';
+}
+
+div.function-usage {
+    display: inline-block;
+    padding: 2px;
+    font-style: italic;
+}
+
+div.function-usage::before {
+    content: 'Usage: ';
+    font-weight: bold;
+    font-style: normal;
+}
+
+div.function-desc {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+span.arg.int { background-color: #ffdddd; }
+span.arg.int:hover { background-color: #ffbbbb; }
+
+span.arg.float { background-color: #ddffdd; }
+span.arg.float:hover { background-color: #bbffbb; }
+
+span.arg.bool { background-color: #ddddff; }
+span.arg.bool:hover { background-color: #bbbbff; }
+
+.arg-tooltip {
+    position: relative;
+    display: inline-block;
+    background-color: white;
+}
+
+.arg-tooltip .arg-tooltip-text {
+    border: 1px solid #bbbbbb;
+    background-color: white;
+    text-align: center;
+    width: 120px;
+    position: absolute;
+    padding: 5px;
+    z-index: 1;
+    bottom: 20px;
+    left: 50%;
+    margin-left: -60px;
+}

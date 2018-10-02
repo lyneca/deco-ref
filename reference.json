@@ -1,0 +1,61 @@
+[
+    {
+        "category": "Pin I/O",
+        "slug": "pinio",
+        "week": 3,
+        "content": [
+            {
+                "function": "pinMode",
+                "arguments": [
+                    {"name": "pin", "type": "int", "desc": "The pin to set up"},
+                    {"name": "mode", "type": "int", "desc": "INPUT or OUTPUT"}
+                ],
+                "desc": [
+                    {"type": "text", "content": "Initialises a pin for input or output."},
+                    {"type": "text", "content": "Call this function in the setup() function for every pin you plan to use."}
+                ]
+            },
+            {
+                "function": "digitalRead",
+                "arguments": [
+                    {"name": "pin", "type": "int", "desc": "The pin that you want to read from"}
+                ],
+                "returns": {
+                    "type": "int",
+                    "desc": "The value of the pin being read"
+                },
+                "desc": [
+                    {"type": "text", "content": "Reads a digital signal (HIGH or LOW; 1 or 0) from a pin."}
+                ]
+            },
+            {
+                "function": "digitalWrite",
+                "arguments": [
+                    {"name": "pin", "type": "int", "desc": "The pin that you want to write to"},
+                    {"name": "value", "type": "int", "desc": "Either HIGH or LOW (1 or 0)"}
+                ],
+                "desc": [
+                    {"type": "text", "content": "Writes a digital signal (HIGH or LOW; 1 or 0) to a pin."}
+                ]
+            }
+        ]
+    },
+    {
+        "category": "Audio",
+        "slug":"audio",
+        "week": 5,
+        "content": [
+            {
+                "function": "tone",
+                "arguments": [
+                    {"name": "pin", "type": "int", "desc": "The pin to set up"},
+                    {"name": "freq", "type": "float", "desc": "The frequency to play", "optional": true}
+                ],
+                "desc": [
+                    {"type": "text", "content": "Plays a frequency on a particular pin."}
+                ]
+            }
+        ]
+    }
+]
+
