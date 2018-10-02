@@ -1,61 +1,141 @@
-[
-    {
-        "category": "Pin I/O",
-        "slug": "pinio",
-        "week": 3,
-        "content": [
-            {
-                "function": "pinMode",
-                "arguments": [
-                    {"name": "pin", "type": "int", "desc": "The pin to set up"},
-                    {"name": "mode", "type": "int", "desc": "INPUT or OUTPUT"}
-                ],
-                "desc": [
-                    {"type": "text", "content": "Initialises a pin for input or output."},
-                    {"type": "text", "content": "Call this function in the setup() function for every pin you plan to use."}
-                ]
-            },
-            {
-                "function": "digitalRead",
-                "arguments": [
-                    {"name": "pin", "type": "int", "desc": "The pin that you want to read from"}
-                ],
-                "returns": {
-                    "type": "int",
-                    "desc": "The value of the pin being read"
-                },
-                "desc": [
-                    {"type": "text", "content": "Reads a digital signal (HIGH or LOW; 1 or 0) from a pin."}
-                ]
-            },
-            {
-                "function": "digitalWrite",
-                "arguments": [
-                    {"name": "pin", "type": "int", "desc": "The pin that you want to write to"},
-                    {"name": "value", "type": "int", "desc": "Either HIGH or LOW (1 or 0)"}
-                ],
-                "desc": [
-                    {"type": "text", "content": "Writes a digital signal (HIGH or LOW; 1 or 0) to a pin."}
-                ]
-            }
-        ]
-    },
-    {
-        "category": "Audio",
-        "slug":"audio",
-        "week": 5,
-        "content": [
-            {
-                "function": "tone",
-                "arguments": [
-                    {"name": "pin", "type": "int", "desc": "The pin to set up"},
-                    {"name": "freq", "type": "float", "desc": "The frequency to play", "optional": true}
-                ],
-                "desc": [
-                    {"type": "text", "content": "Plays a frequency on a particular pin."}
-                ]
-            }
-        ]
-    }
-]
-
+{
+    "functions": [
+        {
+            "function": "pinMode",
+            "tags": [
+                "pins",
+                "setup"
+            ],
+            "week": 3,
+            "arguments": [
+                {"desc": "The pin to set up", "name": "pin", "type": "int"},
+                {"desc": "INPUT or OUTPUT", "name": "mode", "type": "int"}
+            ],
+            "desc": [
+                {"type": "text", "content": "Initialises a pin for input or output."},
+                {"type": "text", "content": "Call this function in the setup() function for every pin you plan to use."}
+            ]
+        },
+        {
+            "function": "digitalRead",
+            "tags": [
+                "pins",
+                "input"
+            ],
+            "week": 3,
+            "arguments": [
+                {"desc": "The pin that you want to read from", "name": "pin", "type": "int"}
+            ],
+            "desc": [
+                {"type": "text", "content": "Reads a digital signal (HIGH or LOW; 1 or 0) from a pin."}
+            ],
+            "returns": {"desc": "The value of the pin being read", "type": "int"}
+        },
+        {
+            "function": "digitalWrite",
+            "tags": [
+                "pins",
+                "output"
+            ],
+            "week": 3,
+            "arguments": [
+                {"desc": "The pin that you want to write to", "name": "pin", "type": "int"},
+                {"desc": "Either HIGH or LOW (1 or 0)", "name": "value", "type": "int"}
+            ],
+            "desc": [
+                {"type": "text", "content": "Writes a digital signal (HIGH or LOW; 1 or 0) to a pin."}
+            ]
+        },
+        {
+            "function": "tone",
+            "tags": [
+                "audio",
+                "output",
+                "pwm"
+            ],
+            "week": 5,
+            "arguments": [
+                {"desc": "The pin to set up", "name": "pin", "type": "int"},
+                {"desc": "The frequency to play", "name": "freq", "type": "float"},
+                {"desc": "The duration to play for (milliseconds)", "name": "duration", "type": "float", "optional": true}
+            ],
+            "desc": [
+                {"type": "text", "content": "Plays a frequency on a particular pin."},
+                {"type": "text", "content": "You can optionally supply a duration, and the tone will play and stop after that duration while your code continues to run."}
+            ]
+        },
+        {
+            "function": "Serial.begin",
+            "tags": [
+                "serial",
+                "setup"
+            ],
+            "week": 4,
+            "arguments": [
+                {"desc": "The baudrate (speed) of the connection - usually 9600", "name": "baudrate", "type": "int"}
+            ],
+            "desc": [
+                {"type": "text", "content": "Initialises serial output."},
+                {"type": "text", "content": "Must be called in setup() to enable Serial output."}
+            ]
+        },
+        {
+            "function": "Serial.print",
+            "tags": [
+                "serial",
+                "debug"
+            ],
+            "week": 4,
+            "arguments": [
+                {"desc": "The data you want to print", "name": "item", "type": "any"}
+            ],
+            "desc": [
+                {"type": "text", "content": "Prints data to the computer over serial, without the trailing newline."}
+            ]
+        },
+        {
+            "function": "noTone",
+            "tags": [
+                "audio",
+                "output",
+                "pwm"
+            ],
+            "week": 5,
+            "arguments": [
+                {"desc": "The pin to silence", "name": "pin", "type": "int"}
+            ],
+            "desc": [
+                {"type": "text", "content": "Immediately stops all tones on a pin."}
+            ]
+        },
+        {
+            "function": "CurieIMU.begin",
+            "tags": [
+                "curie",
+                "imu",
+                "input"
+            ],
+            "arguments": [],
+            "desc": [
+                {"type": "text", "content": "Initialises the Curie IMU for input"}
+            ]
+        },
+        {
+            "function": "CurieIMU.readAccelerometer",
+            "tags": [
+                "curie",
+                "imu",
+                "input"
+            ],
+            "arguments": [
+                {"desc": "A variable that the function will fill with the X acceleration value", "name": "x", "type": "float"},
+                {"desc": "A variable that the function will fill with the Y acceleration value", "name": "y", "type": "float"},
+                {"desc": "A variable that the function will fill with the Z acceleration value", "name": "z", "type": "float"}
+            ],
+            "desc": [
+                {"type": "text", "content": "Reads x, y and z acceleration values into the variables provided."},
+                {"type": "text", "content": ""}
+            ]
+        }
+    ]
+}

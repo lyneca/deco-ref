@@ -10,15 +10,17 @@ function loadContent() {
         }).promise();
 }
 
-function makeArg(name, type, desc) {
+function makeArg(name, type, desc, optional) {
     var argClass = $('<span>')
         .addClass('arg')
         .addClass(type)
-        .text(name)
+        .text(optional ? '[' + name + ']' : name)
         .attr('arg-desc', desc)
         .attr('arg-type', type)
         .hover(function() {
-            $(this).children().fadeToggle({duration: 100, queue: true});
+            $(this).children().fadeIn(100);
+        }, function() {
+            $(this).children().fadeOut(100);
         })
     var argTooltip = $('<div>')
         .addClass('arg-tooltip')
@@ -28,6 +30,21 @@ function makeArg(name, type, desc) {
         .hide()
     argClass.append(argTooltip);
     return argClass;
+}
+
+function makeTag(tag) {
+    var tagClass = $('<div>')
+        .addClass('tag')
+        .addClass('tag-' + tag)
+        .text(tag)
+        .hover(function() {
+            var current = $(this);
+            $('.tag-' + current.text()).not(current).parents('div.function').addClass('highlighted')
+        }, function() {
+            var current = $(this);
+            $('.tag-' + current.text()).not(current).parents('div.function').removeClass('highlighted')
+        });
+    return tagClass;
 }
 
 function constructFunction(f) {
@@ -40,7 +57,7 @@ function constructFunction(f) {
     usage.append(f.function + '(');
     for (var i = 0; i < f.arguments.length; i++) {
         var arg = f.arguments[i];
-        usage.append(makeArg(arg.name, arg.type, arg.desc));
+        usage.append(makeArg(arg.name, arg.type, arg.desc, arg.optional));
         if (i < f.arguments.length - 1) {
             usage.append(', '); 
         }
@@ -49,7 +66,7 @@ function constructFunction(f) {
     if (f.returns) {
         var returns = $('<span>').addClass('returns');
         returns.append(' -> ')
-        returns.append(makeArg(f.returns.type, f.returns.type, f.returns.desc));
+        returns.append(makeArg(f.returns.type, f.returns.type, f.returns.desc, false));
     }
 
     usage.append(returns);
@@ -64,8 +81,16 @@ function constructFunction(f) {
         }
     })
 
+    var tags = $('<div>').addClass('function-tags');
+
+    $.each(f.tags, function() {
+        tags.append(makeTag(this));
+    })
+
+    info.append($('<span>').addClass('function-usage-text').text("Usage: "));
     info.append(usage);
     info.append(desc);
+    info.append(tags);
     info.toggle();
     div.append(info);
     div.click(function() {
@@ -76,27 +101,62 @@ function constructFunction(f) {
 }
 
 function viewByWeek() {
-    $.each(reference, function() {
-        var weekNum = this.week;
-        var week = $('<div>')
-            .addClass('week')
-            .attr("id", 'week-' + weekNum)
-            .append(
-                $('<div>')
-                .addClass('week-heading')
-                .text("Week " + weekNum)
-            );
-        $('.content').append(week);
-        var functions = $('<div>').addClass('function-list');
-        $.each(this.content, function() {
-            console.log("Adding " + this.function)
-            functions.append(constructFunction(this));
-        });
-        week.append(functions);
+    var weeks = [];
+    $.each(reference.functions, function() {
+        console.log("Found week " + this.week);
+        if (this.hasOwnProperty('week'))
+            weeks.push(this.week);
+    });
+    weeks.sort();
+    $.each(weeks, function() {
+        if ($('.content').children('#week-' + this).length == 0) {
+            console.log("Adding week " + this);
+            var week = $('<div>')
+                .addClass('week')
+                .attr("id", 'week-' + this)
+                .append(
+                    $('<div>')
+                    .addClass('week-heading')
+                    .text("Week " + this)
+                );
+            week.append($('<div>').addClass('function-list'));
+            $('.content').append(week);
+        }
+    });
+    var general = $('<div>')
+        .addClass('week')
+        .attr("id", 'week-general')
+        .append(
+            $('<div>')
+            .addClass('week-heading')
+            .text("General")
+        );
+    general.append($('<div>').addClass('function-list'));
+    $('.content').append(general);
+
+    $.each(reference.functions, function() {
+        console.log("Adding " + this.function)
+        if (this.hasOwnProperty("week"))
+            $('#week-' + this.week + '> .function-list').append(constructFunction(this));
+        else
+            $('#week-general > .function-list').append(constructFunction(this));
     });
 }
 
+function filterFunctions() {
+    var text = $('.search > input').val().toLowerCase();
+    console.log(text);
+    $('.function').filter(function() {
+        return !$(this).text().toLowerCase().includes(text)
+    }).hide()
+    $('.function').filter(function() {
+        return $(this).text().toLowerCase().includes(text)
+    }).show().parent().parent().show()
+    $(".function:hidden").parent().parent().not($(":visible").parent().parent()).hide();
+}
+
 $(document).ready(function() {
+    $('.search > input').keyup(filterFunctions);
     loadContent()
         .done(function() {
             console.log("Done loading. Rendering now.");

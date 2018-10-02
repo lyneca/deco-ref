@@ -8,12 +8,45 @@ h1 {
     margin: 0;
 }
 
+p {
+    margin: 10px;
+}
+
 div.header {
-    grid-column: span 2;
     text-align: center;
     border-bottom: 1px solid #eeeeee;
     padding: 10px;
     margin-bottom: 10px;
+}
+
+div.content {
+    width: 90%;
+    margin: auto;
+}
+
+div.search {
+    width: 100%;
+}
+
+div.search > input {
+    width: 60%;
+    font-size: 30px;
+    padding: 10px;
+    margin: 5px;
+    color: #999999;
+    font-family: "Inconsolata", "Courier New", monospace;
+    border: 1px solid #bbbbbb;
+    border-radius: 5px;
+    transition: border 0.2s ease-in-out;
+}
+
+div.search > input:hover,
+div.search > input:focus {
+    border: 1px solid #777777;
+}
+
+.highlighted {
+    background-color: #eeeeff;
 }
 
 .underline {
@@ -23,19 +56,29 @@ div.header {
 }
 
 div.content {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    grid-gap: 5px;
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+    /* justify-content: center; */
+    /* grid-template-columns: 1fr 1fr 1fr; */
+    /* grid-template-rows: 1fr 1fr; */
+    /* grid-gap: 10px; */
+    /* align-items: start; */
+
+    column-count: 3;
+    column-gap: 10px;
 }
 
 div.week {
+    width: 100%;
+    display: inline-block;
+    margin: 0 0 10px;
     border: 1px solid #bbbbbb;
 }
 
 div.week-heading {
     text-align: center;
     margin-bottom: 5px;
+    padding: 5px;
     font-size: 30px;
     border-bottom: 1px solid #bbbbbb;
 }
@@ -45,6 +88,7 @@ div.function {
     padding: 5px;
     border-radius: 5px;
     border: 1px solid #bbbbbb;
+    transition: background-color 0.2s ease-in-out;
 }
 
 div.function-name {
@@ -57,20 +101,22 @@ div.function-name:before {
 
 div.function-usage {
     display: inline-block;
-    padding: 2px;
-    font-style: italic;
+    padding: 5px;
+    background-color: #f0f0f0;
+    /* font-style: italic; */
 }
 
-div.function-usage::before {
-    content: 'Usage: ';
+div.function-usage-text {
     font-weight: bold;
-    font-style: normal;
 }
 
 div.function-desc {
     padding-left: 20px;
     padding-right: 20px;
 }
+
+span.arg.any { background-color: #ddffff; }
+span.arg.any:hover { background-color: #bbffff; }
 
 span.arg.int { background-color: #ffdddd; }
 span.arg.int:hover { background-color: #ffbbbb; }
@@ -84,18 +130,33 @@ span.arg.bool:hover { background-color: #bbbbff; }
 .arg-tooltip {
     position: relative;
     display: inline-block;
-    background-color: white;
 }
 
 .arg-tooltip .arg-tooltip-text {
     border: 1px solid #bbbbbb;
     background-color: white;
+    box-shadow: 0 0 9px 1px rgba(0, 0, 0, 0.2);
     text-align: center;
-    width: 120px;
     position: absolute;
+    width: 300px;
     padding: 5px;
     z-index: 1;
     bottom: 20px;
     left: 50%;
-    margin-left: -60px;
+    margin-left: -150px;
 }
+
+div.tag {
+    display: inline-block;
+    padding: 5px;
+    border: 1px solid #bbbbbb;
+    border-radius: 5px;
+    margin: 5px;
+    transition: background-color 0.2s ease-in-out;
+    user-select: none;
+}
+
+div.tag:hover {
+    background-color: #eeeeff;
+}
+
