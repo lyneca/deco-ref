@@ -97,7 +97,9 @@ div.function-name {
 }
 
 div.function-name:before {
-    content: ': ';
+    content: ':';
+    margin-right: 3px;
+    color: #777777;
 }
 
 div.function-usage {
