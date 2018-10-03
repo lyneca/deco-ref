@@ -102,10 +102,12 @@ function constructFunction(f) {
 
 function viewByWeek() {
     var weeks = [];
+    var has_general = false;
     $.each(reference.functions, function() {
         console.log("Found week " + this.week);
         if (this.hasOwnProperty('week'))
             weeks.push(this.week);
+        else has_general = true;
     });
     weeks.sort();
     $.each(weeks, function() {
@@ -123,17 +125,18 @@ function viewByWeek() {
             $('.content').append(week);
         }
     });
-    var general = $('<div>')
-        .addClass('week')
-        .attr("id", 'week-general')
-        .append(
-            $('<div>')
-            .addClass('week-heading')
-            .text("General")
-        );
-    general.append($('<div>').addClass('function-list'));
-    $('.content').append(general);
-
+    if (has_general) {
+        var general = $('<div>')
+            .addClass('week')
+            .attr("id", 'week-general')
+            .append(
+                $('<div>')
+                .addClass('week-heading')
+                .text("General")
+            );
+        general.append($('<div>').addClass('function-list'));
+        $('.content').append(general);
+    }
     $.each(reference.functions, function() {
         console.log("Adding " + this.function)
         if (this.hasOwnProperty("week"))
