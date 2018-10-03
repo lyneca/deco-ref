@@ -163,7 +163,13 @@ div.tag:hover {
     background-color: #eeeeff;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1200px) {
+    div.content {
+        column-count: 2;
+    }
+}
+
+@media screen and (max-width: 750px) {
     div.content {
         column-count: 1;
     }
