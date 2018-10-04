@@ -108,8 +108,7 @@ div.function {
     padding: 5px;
     border-radius: 5px;
     border: 1px solid #bbbbbb;
-    transition: border-color 0.1s ease-in-out;
-    transition: background-color 0.2s ease-in-out;
+    transition: background-color 0.2s ease-in-out, border-color 0.1s ease-in-out;
 }
 
 div.function:hover {
