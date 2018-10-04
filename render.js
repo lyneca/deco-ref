@@ -50,7 +50,7 @@ function makeTag(tag) {
 
 function constructFunction(f) {
 	var div = $('<div>').addClass('function');
-	div.append($('<div>').addClass('function-name').text(f.function))
+    var name = $('<div>').addClass('function-name').text(f.function);
 	var info = $('<div>').addClass('function-info')
 	var usage = $('<div>').addClass('function-usage');
 
@@ -88,16 +88,18 @@ function constructFunction(f) {
 		tags.append(makeTag(this));
 	})
 
-	info.append($('<span>').addClass('function-usage-text').text("Usage:"));
+	name.click(function() {
+		$(this).parent().children('.function-info').toggle(100);
+		$(this).parent().children('.function-name').toggleClass('underline');
+	})
+
+	info.append($('<span>').addClass('function-usage-text').text("> "));
 	info.append(usage);
 	info.append(desc);
 	info.append(tags);
 	info.toggle();
+	div.append(name)
 	div.append(info);
-	div.click(function() {
-		$(this).children('.function-info').toggle(100);
-		$(this).children('.function-name').toggleClass('underline');
-	})
 	return div;
 }
 
