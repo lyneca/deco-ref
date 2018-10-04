@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Inconsolata');
 body, html {
-    height: 100%;
 }
 
 body {
@@ -13,7 +12,7 @@ body {
 
 h1 {
     font-weight: normal;
-    margin: 0;
+    margin: 10px;
 }
 
 p {
@@ -23,26 +22,27 @@ p {
 div.header {
     background-color: white;
     position: fixed;
-    width: 100%;
+    width: calc(100% - 40px);
     text-align: center;
     border-bottom: 1px solid #bbbbbb;
-    padding: 10px;
+    padding: 9px;
     margin-bottom: 10px;
 }
 
 div.controls {
-    position: fixed;
-    top: 10px;
-    right: 10px;
+    display: inline-block;
 }
 
-div.content {
-    width: 90%;
-    margin: auto;
-    margin-top: 119px;
+span.view-by-tags,
+span.view-by-week {
+    display: block;
+    margin-top: 5px;
+    font-size: 20px;
+    color: #bbbbbb;
 }
 
 div.search {
+    vertical-align: middle;
     width: 100%;
 }
 
@@ -74,17 +74,15 @@ div.search > input:focus {
 }
 
 div.content {
-    /* display: flex; */
-    /* flex-wrap: wrap; */
-    /* justify-content: center; */
-    /* grid-template-columns: 1fr 1fr 1fr; */
-    /* grid-template-rows: 1fr 1fr; */
-    /* grid-gap: 10px; */
-    /* align-items: start; */
+    margin: auto;
+    margin-top: 136px;
 
-    height: 100%;
+    /* min-height: 100%; */
 
-    column-count: 3;
+    width: 90%;
+
+    /* column-count: 3; */
+    column-width: 300px;
     column-gap: 10px;
 }
 
@@ -110,7 +108,11 @@ div.function {
     padding: 5px;
     border-radius: 5px;
     border: 1px solid #bbbbbb;
-    transition: background-color 0.2s ease-in-out;
+    transition: border-color 0.1s ease-in-out;
+}
+
+div.function:hover {
+    border-color: #777777;
 }
 
 div.function-name {
@@ -125,14 +127,17 @@ div.function-name:before {
 
 div.function-usage {
     display: inline-block;
+    margin-top: 5px;
     padding: 5px;
-    margin-left: 5px;
+    margin-left: 10px;
     background-color: #f0f0f0;
     /* font-style: italic; */
 }
 
 span.function-usage-text {
-    font-weight: bold;
+    display: none;
+    padding: 3px;
+    margin-left: 5px;
 }
 
 div.function-desc {
