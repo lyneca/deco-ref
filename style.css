@@ -1,7 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Inconsolata');
+body, html {
+    height: 100%;
+}
+
 body {
+    margin: 0 10px;
     font-family: "Inconsolata", "Courier New", monospace;
     background-color: white;
+    display: flex;
+    flex-direction: column;
 }
 
 h1 {
@@ -14,15 +21,25 @@ p {
 }
 
 div.header {
+    background-color: white;
+    position: fixed;
+    width: 100%;
     text-align: center;
-    border-bottom: 1px solid #eeeeee;
+    border-bottom: 1px solid #bbbbbb;
     padding: 10px;
     margin-bottom: 10px;
+}
+
+div.controls {
+    position: fixed;
+    top: 10px;
+    right: 10px;
 }
 
 div.content {
     width: 90%;
     margin: auto;
+    margin-top: 119px;
 }
 
 div.search {
@@ -33,7 +50,7 @@ div.search > input {
     width: 60%;
     font-size: 30px;
     padding: 10px;
-    margin: 5px;
+    margin: 0;
     color: #999999;
     font-family: "Inconsolata", "Courier New", monospace;
     border: 1px solid #bbbbbb;
@@ -65,18 +82,22 @@ div.content {
     /* grid-gap: 10px; */
     /* align-items: start; */
 
+    height: 100%;
+
     column-count: 3;
     column-gap: 10px;
 }
 
-div.week {
+div.week,
+div.tag-cont {
     width: 100%;
     display: inline-block;
     margin: 0 0 10px;
     border: 1px solid #bbbbbb;
 }
 
-div.week-heading {
+div.week-heading,
+div.tag-heading {
     text-align: center;
     margin-bottom: 5px;
     padding: 5px;
@@ -105,30 +126,31 @@ div.function-name:before {
 div.function-usage {
     display: inline-block;
     padding: 5px;
+    margin-left: 5px;
     background-color: #f0f0f0;
     /* font-style: italic; */
 }
 
-div.function-usage-text {
+span.function-usage-text {
     font-weight: bold;
 }
 
 div.function-desc {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
-span.arg.any { background-color: #ddffff; }
-span.arg.any:hover { background-color: #bbffff; }
+span.arg.arg-type-any { background-color: #ddffff; }
+span.arg.arg-type-any:hover { background-color: #bbffff; }
 
-span.arg.int { background-color: #ffdddd; }
-span.arg.int:hover { background-color: #ffbbbb; }
+span.arg.arg-type-int { background-color: #ffdddd; }
+span.arg.arg-type-int:hover { background-color: #ffbbbb; }
 
-span.arg.float { background-color: #ddffdd; }
-span.arg.float:hover { background-color: #bbffbb; }
+span.arg.arg-type-float { background-color: #ddffdd; }
+span.arg.arg-type-float:hover { background-color: #bbffbb; }
 
-span.arg.bool { background-color: #ddddff; }
-span.arg.bool:hover { background-color: #bbbbff; }
+span.arg.arg-type-bool { background-color: #ddddff; }
+span.arg.arg-type-bool:hover { background-color: #bbbbff; }
 
 .arg-tooltip {
     position: relative;
